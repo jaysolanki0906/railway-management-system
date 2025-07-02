@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http'; // Added HTTP providers
 import { provideAnimations } from '@angular/platform-browser/animations'; // Added for animations
 import { routes } from './app.routes';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,6 @@ export const appConfig: ApplicationConfig = {
       ])
     ),
     // Animations support
-    provideAnimations()
+    provideAnimations(), provideClientHydration(withEventReplay())
   ]
 };
