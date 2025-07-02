@@ -1,0 +1,166 @@
+<header class="header">
+  <div class="header-container">
+    <!-- Logo and Brand -->
+    <div class="brand-section">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="12" width="24" height="8" rx="2" fill="#2563eb"/>
+          <rect x="6" y="8" width="4" height="4" rx="1" fill="#3b82f6"/>
+          <rect x="22" y="8" width="4" height="4" rx="1" fill="#3b82f6"/>
+          <rect x="8" y="22" width="16" height="2" rx="1" fill="#64748b"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1 class="brand-title">RailwayMS</h1>
+        <span class="brand-subtitle">Train Management System</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu (Desktop) -->
+    <nav class="desktop-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="/dashboard" class="nav-link active">
+            <span class="nav-icon">📊</span>
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/trains" class="nav-link">
+            <span class="nav-icon">🚆</span>
+            Trains
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/schedules" class="nav-link">
+            <span class="nav-icon">📅</span>
+            Schedules
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/bookings" class="nav-link">
+            <span class="nav-icon">🎫</span>
+            Bookings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/stations" class="nav-link">
+            <span class="nav-icon">🏢</span>
+            Stations
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/reports" class="nav-link">
+            <span class="nav-icon">📈</span>
+            Reports
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Right Section -->
+    <div class="header-actions">
+      <!-- Search -->
+      <div class="search-container">
+        <input type="text" placeholder="Search trains, routes..." class="search-input">
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <!-- Notifications -->
+      <div class="notification-wrapper">
+        <button class="notification-button" (click)="toggleNotifications()">
+          <span class="notification-icon">🔔</span>
+          <span class="notification-badge" *ngIf="notifications.length > 0">
+            {{ notifications.length }}
+          </span>
+        </button>
+        
+        <div class="notification-dropdown" *ngIf="isNotificationDropdownOpen">
+          <div class="dropdown-header">
+            <h3>Notifications</h3>
+            <span class="notification-count">{{ notifications.length }}</span>
+          </div>
+          <div class="notification-list">
+            <div class="notification-item" *ngFor="let notification of notifications">
+              <div class="notification-content">
+                <span class="notification-type-icon">
+                  {{ getNotificationIcon(notification.type) }}
+                </span>
+                <div class="notification-text">
+                  <p>{{ notification.message }}</p>
+                  <span class="notification-time">{{ notification.time }}</span>
+                </div>
+                <button class="clear-notification" (click)="clearNotification(notification.id)">
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-footer">
+            <a href="/notifications" class="view-all-link">View All Notifications</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Profile -->
+      <div class="user-wrapper">
+        <button class="user-button" (click)="toggleUserDropdown()">
+          <img [src]="currentUser.avatar" [alt]="currentUser.name" class="user-avatar">
+          <div class="user-info">
+            <span class="user-name">{{ currentUser.name }}</span>
+            <span class="user-role">{{ currentUser.role }}</span>
+          </div>
+          <span class="dropdown-arrow">▼</span>
+        </button>
+
+        <div class="user-dropdown" *ngIf="isUserDropdownOpen">
+          <div class="dropdown-header">
+            <img [src]="currentUser.avatar" [alt]="currentUser.name" class="user-avatar-large">
+            <div>
+              <h4>{{ currentUser.name }}</h4>
+              <p>{{ currentUser.role }}</p>
+            </div>
+          </div>
+          <div class="dropdown-menu">
+            <a href="/profile" class="dropdown-item">
+              <span class="item-icon">👤</span>
+              Profile Settings
+            </a>
+            <a href="/preferences" class="dropdown-item">
+              <span class="item-icon">⚙️</span>
+              Preferences
+            </a>
+            <a href="/help" class="dropdown-item">
+              <span class="item-icon">❓</span>
+              Help & Support
+            </a>
+            <hr class="dropdown-divider">
+            <button class="dropdown-item logout-item" (click)="logout()">
+              <span class="item-icon">🚪</span>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
+    <ul class="mobile-nav-list">
+      <li><a href="/dashboard" (click)="navigateToRoute('/dashboard')">📊 Dashboard</a></li>
+      <li><a href="/trains" (click)="navigateToRoute('/trains')">🚆 Trains</a></li>
+      <li><a href="/schedules" (click)="navigateToRoute('/schedules')">📅 Schedules</a></li>
+      <li><a href="/bookings" (click)="navigateToRoute('/bookings')">🎫 Bookings</a></li>
+      <li><a href="/stations" (click)="navigateToRoute('/stations')">🏢 Stations</a></li>
+      <li><a href="/reports" (click)="navigateToRoute('/reports')">📈 Reports</a></li>
+    </ul>
+  </nav>
+</header>

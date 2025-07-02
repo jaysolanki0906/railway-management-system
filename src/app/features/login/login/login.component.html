@@ -1,0 +1,145 @@
+<div class="login-container">
+  <div class="login-background">
+    <div class="train-animation">
+      <div class="train">
+        <div class="train-car front"></div>
+        <div class="train-car middle"></div>
+        <div class="train-car back"></div>
+      </div>
+      <div class="track"></div>
+    </div>
+  </div>
+  
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" class="train-icon">
+          <path d="M4 15.5C4 17.43 5.57 19 7.5 19L6 20.5V21H18V20.5L16.5 19C18.43 19 20 17.43 20 15.5V5C20 3.57 18.43 2 17 2H7C5.57 2 4 3.57 4 5V15.5ZM7 5H17V11H7V5ZM7.5 17C6.67 17 6 16.33 6 15.5S6.67 14 7.5 14 9 14.67 9 15.5 8.33 17 7.5 17ZM16.5 17C15.67 17 15 16.33 15 15.5S15.67 14 16.5 14 18 14.67 18 15.5 17.33 17 16.5 17Z"/>
+        </svg>
+        <h1>RailWay</h1>
+      </div>
+      <p class="subtitle">Train Management System</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-section">
+      <div class="form-group">
+        <label for="email" class="floating-label">
+          <svg class="label-icon" viewBox="0 0 24 24">
+            <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>
+          </svg>
+          Email Address<small style="color: red;">*</small>
+        </label>
+        <div class="input-container" [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          <div class="input-glow"></div>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="admin@railway.com"
+            [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          />
+          <div class="input-border"></div>
+        </div>
+        <small style="color: red;" *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
+          Email is required
+        </small>
+        <small style="color: red;" *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">
+          Please enter a valid email address
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="floating-label">
+          <svg class="label-icon" viewBox="0 0 24 24">
+            <path d="M18 8H17V6C17 3.24 14.76 1 12 1S7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15S10.9 13 12 13 14 13.9 14 15 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9S15.1 4.29 15.1 6V8Z"/>
+          </svg>
+          Password<small style="color: red;">*</small>
+        </label>
+        <div class="input-container" [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <div class="input-glow"></div>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your secure password"
+            [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          />
+          <button
+            type="button"
+            class="password-toggle"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          >
+            <div class="toggle-background"></div>
+            <svg  *ngIf="!showPassword" viewBox="0 0 24 24" class="eye-icon">
+              <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5S21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12S9.24 7 12 7 17 9.24 17 12 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12S10.34 15 12 15 15 13.66 15 12 13.66 9 12 9Z"/>
+            </svg>
+            <svg *ngIf="showPassword" viewBox="0 0 24 24" class="eye-icon eye-off">
+              <path d="M12 7C9.24 7 7 9.24 7 12C7 12.65 7.13 13.26 7.36 13.82L9.8 11.38C9.93 10.5 10.45 9.71 11.19 9.36L12 7ZM2 4.27L4.28 6.55L4.73 7C3.08 8.3 1.78 10 1 12C2.73 16.39 7 19.5 12 19.5C13.55 19.5 15.03 19.2 16.38 18.66L16.81 19.09L19.73 22L21 20.73L3.27 3L2 4.27ZM7.53 9.8L9.08 11.35C9.03 11.56 9 11.78 9 12C9 13.66 10.34 15 12 15C12.22 15 12.44 14.97 12.65 14.92L14.2 16.47C13.53 16.8 12.79 17 12 17C9.24 17 7 14.76 7 12C7 11.21 7.2 10.47 7.53 9.8ZM15.64 4.94L12 7L15.47 10.47C15.8 9.79 16 9.05 16 8.24C16 6.58 14.66 5.24 13 5.24C12.19 5.24 11.45 5.44 10.77 5.77L15.64 4.94Z"/>
+            </svg>
+          </button>
+          <div class="input-border"></div>
+        </div>
+        <small style="color: red;" *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
+          Password is required
+        </small>
+        <small style="color: red;" *ngIf="loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')?.touched">
+          Password must be at least 6 characters
+        </small>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
+        </svg>
+        {{ errorMessage }}
+      </div>
+      </div>
+
+      <button
+        type="submit"
+        class="login-btn"
+        [disabled]="isLoading || loginForm.invalid"
+        [class.loading]="isLoading"
+      >
+        <div class="btn-background"></div>
+        <span class="btn-content" *ngIf="!isLoading">
+          <svg class="btn-icon" viewBox="0 0 24 24">
+            <path d="M10 17L15 12L10 7V10H4V14H10V17ZM20 12C20 7.59 16.41 4 12 4S4 7.59 4 12H6C6 8.69 8.69 6 12 6S18 8.69 18 12S15.31 18 12 18H11V20H12C16.41 20 20 16.41 20 12Z"/>
+          </svg>
+          Sign In to Railway
+        </span>
+        <div *ngIf="isLoading" class="loading-spinner">
+          <div class="spinner-ring">
+            <div class="spinner-circle"></div>
+          </div>
+          <span>Authenticating...</span>
+        </div>
+        <div class="btn-shine"></div>
+      </button>
+
+      <div class="social-buttons">
+        <button type="button" class="social-btn google" (click)="loginWithGoogle()">
+          <svg viewBox="0 0 24 24" class="social-icon">
+            <path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.66 15.63 16.84 16.79 15.63 17.57V20.34H19.27C21.19 18.58 22.56 15.69 22.56 12.25Z" fill="#4285F4"/>
+            <path d="M12 23C15.24 23 17.96 21.91 19.27 20.34L15.63 17.57C14.59 18.25 13.29 18.64 12 18.64C8.87 18.64 6.22 16.84 5.3 14.25H1.54V17.11C2.84 19.69 7.18 23 12 23Z" fill="#34A853"/>
+            <path d="M5.3 14.25C5.08 13.57 4.96 12.84 4.96 12.1S5.08 10.63 5.3 9.95V7.09H1.54C0.73 8.71 0.27 10.35 0.27 12.1S0.73 15.49 1.54 17.11L5.3 14.25Z" fill="#FBBC05"/>
+            <path d="M12 5.36C13.44 5.36 14.72 5.87 15.71 6.81L18.86 3.66C17.96 2.84 15.24 1 12 1C7.18 1 2.84 4.31 1.54 6.89L5.3 9.75C6.22 7.16 8.87 5.36 12 5.36Z" fill="#EA4335"/>
+          </svg>
+          Google
+        </button>
+        
+        <button type="button" class="social-btn microsoft" (click)="loginWithMicrosoft()">
+          <svg viewBox="0 0 24 24" class="social-icon">
+            <path fill="#f25022" d="M1 1h10v10H1z"/>
+            <path fill="#00a4ef" d="M13 1h10v10H13z"/>
+            <path fill="#7fba00" d="M1 13h10v10H1z"/>
+            <path fill="#ffb900" d="M13 13h10v10H13z"/>
+          </svg>
+          Microsoft
+        </button>
+      </div>
+    </form>    
+  </div>
+</div>
