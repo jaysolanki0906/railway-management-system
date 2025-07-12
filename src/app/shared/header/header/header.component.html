@@ -1,166 +1,54 @@
-<header class="header">
-  <div class="header-container">
-    <!-- Logo and Brand -->
-    <div class="brand-section">
+<header>
+  <div class="container">
+    <div class="header-content">
       <div class="logo">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect x="4" y="12" width="24" height="8" rx="2" fill="#2563eb"/>
-          <rect x="6" y="8" width="4" height="4" rx="1" fill="#3b82f6"/>
-          <rect x="22" y="8" width="4" height="4" rx="1" fill="#3b82f6"/>
-          <rect x="8" y="22" width="16" height="2" rx="1" fill="#64748b"/>
-        </svg>
-      </div>
-      <div class="brand-text">
-        <h1 class="brand-title">RailwayMS</h1>
-        <span class="brand-subtitle">Train Management System</span>
-      </div>
-    </div>
-
-    <!-- Navigation Menu (Desktop) -->
-    <nav class="desktop-nav">
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a href="/dashboard" class="nav-link active">
-            <span class="nav-icon">📊</span>
-            Dashboard
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/trains" class="nav-link">
-            <span class="nav-icon">🚆</span>
-            Trains
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/schedules" class="nav-link">
-            <span class="nav-icon">📅</span>
-            Schedules
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/bookings" class="nav-link">
-            <span class="nav-icon">🎫</span>
-            Bookings
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/stations" class="nav-link">
-            <span class="nav-icon">🏢</span>
-            Stations
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/reports" class="nav-link">
-            <span class="nav-icon">📈</span>
-            Reports
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Right Section -->
-    <div class="header-actions">
-      <!-- Search -->
-      <div class="search-container">
-        <input type="text" placeholder="Search trains, routes..." class="search-input">
-        <span class="search-icon">🔍</span>
-      </div>
-
-      <!-- Notifications -->
-      <div class="notification-wrapper">
-        <button class="notification-button" (click)="toggleNotifications()">
-          <span class="notification-icon">🔔</span>
-          <span class="notification-badge" *ngIf="notifications.length > 0">
-            {{ notifications.length }}
-          </span>
-        </button>
-        
-        <div class="notification-dropdown" *ngIf="isNotificationDropdownOpen">
-          <div class="dropdown-header">
-            <h3>Notifications</h3>
-            <span class="notification-count">{{ notifications.length }}</span>
-          </div>
-          <div class="notification-list">
-            <div class="notification-item" *ngFor="let notification of notifications">
-              <div class="notification-content">
-                <span class="notification-type-icon">
-                  {{ getNotificationIcon(notification.type) }}
-                </span>
-                <div class="notification-text">
-                  <p>{{ notification.message }}</p>
-                  <span class="notification-time">{{ notification.time }}</span>
-                </div>
-                <button class="clear-notification" (click)="clearNotification(notification.id)">
-                  ✕
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="dropdown-footer">
-            <a href="/notifications" class="view-all-link">View All Notifications</a>
-          </div>
+        <div class="logo-icon">
+          B
         </div>
       </div>
 
-      <!-- User Profile -->
-      <div class="user-wrapper">
-        <button class="user-button" (click)="toggleUserDropdown()">
-          <img [src]="currentUser.avatar" [alt]="currentUser.name" class="user-avatar">
-          <div class="user-info">
-            <span class="user-name">{{ currentUser.name }}</span>
-            <span class="user-role">{{ currentUser.role }}</span>
-          </div>
-          <span class="dropdown-arrow">▼</span>
+      <nav class="nav-menu">
+        <button class="nav-item" (click)="dashboardNavigate()">
+          <span class="material-icons">bar_chart</span>
+          <span>Dashboard</span>
         </button>
+        <button class="nav-item" (click)="bookTickitNavigate()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="35px" fill="#FFFFFF"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
+          <span>My booking</span>
+        </button>
+        <button class="nav-item" (click)="bookingNavigate()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="35px" fill="#FFFFFF"><path d="M240-120v-40l60-40q-59 0-99.5-40.5T160-340v-380q0-83 77-121.5T480-880q172 0 246 37t74 123v380q0 59-40.5 99.5T660-200l60 40v40H240Zm-20-425h520v-155H220v155Zm440 60H220h520-80ZM480.06-315Q503-315 519-331.06q16-16.06 16-39T518.94-409q-16.06-16-39-16T441-408.94q-16 16.06-16 39T441.06-331q16.06 16 39 16ZM300-255h360q34 0 57-25t23-60v-145H220v145q0 35 23 60t57 25Zm180-565q-120 0-173 15.5T231-760h501q-18-27-76.5-43.5T480-820Zm0 60h252-501 249Z"/></svg>
+          <span>Book Train</span>
+        </button>
+        <button class="nav-item" (click)="PNRNaviagation()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="35px" fill="#ffffff"><path d="M360-280h240v-40l-40-20q33 0 56.5-23.5T640-420v-180q0-43-37-61.5T480-680q-83 0-121.5 19T320-600v180q0 33 23.5 56.5T400-340l-40 20v40Zm50-100q-13 0-21.5-8.5T380-410q0-13 8.5-21.5T410-440q13 0 21.5 8.5T440-410q0 13-8.5 21.5T410-380Zm140 0q-13 0-21.5-8.5T520-410q0-13 8.5-21.5T550-440q13 0 21.5 8.5T580-410q0 13-8.5 21.5T550-380ZM380-480v-120h200v120H380ZM160-160q-33 0-56.5-23.5T80-240v-135q0-11 7-19t18-10q24-8 39.5-29t15.5-47q0-26-15.5-47T105-556q-11-2-18-10t-7-19v-135q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v135q0 11-7 19t-18 10q-24 8-39.5 29T800-480q0 26 15.5 47t39.5 29q11 2 18 10t7 19v135q0 33-23.5 56.5T800-160H160Zm0-80h640v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102Zm320-240Z"/></svg>
+          <span>Check PNR</span>
+        </button>
+        <button class="nav-item" (click)="userNaviagation()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M185-80q-17 0-29.5-12.5T143-122v-105q0-90 56-159t144-88q-40 28-62 70.5T259-312v190q0 11 3 22t10 20h-87Zm147 0q-17 0-29.5-12.5T290-122v-190q0-70 49.5-119T459-480h189q70 0 119 49t49 119v64q0 70-49 119T648-80H332Zm148-484q-66 0-112-46t-46-112q0-66 46-112t112-46q66 0 112 46t46 112q0 66-46 112t-112 46Z"/></svg>
+          <span>Users</span>
+        </button>
+        <button class="nav-item" (click)="passwordChnage()">
+          <span class="material-icons">lock</span>
+          <span>Change Password</span>
+        </button>
+        <button class="nav-item" (click)="logout()">
+          <span class="material-icons">logout</span>
+          <span>Logout</span>
+        </button>
+      </nav>
 
-        <div class="user-dropdown" *ngIf="isUserDropdownOpen">
-          <div class="dropdown-header">
-            <img [src]="currentUser.avatar" [alt]="currentUser.name" class="user-avatar-large">
-            <div>
-              <h4>{{ currentUser.name }}</h4>
-              <p>{{ currentUser.role }}</p>
-            </div>
-          </div>
-          <div class="dropdown-menu">
-            <a href="/profile" class="dropdown-item">
-              <span class="item-icon">👤</span>
-              Profile Settings
-            </a>
-            <a href="/preferences" class="dropdown-item">
-              <span class="item-icon">⚙️</span>
-              Preferences
-            </a>
-            <a href="/help" class="dropdown-item">
-              <span class="item-icon">❓</span>
-              Help & Support
-            </a>
-            <hr class="dropdown-divider">
-            <button class="dropdown-item logout-item" (click)="logout()">
-              <span class="item-icon">🚪</span>
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile Menu Toggle -->
-      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+        <span class="material-icons">menu</span>
       </button>
     </div>
-  </div>
 
-  <!-- Mobile Navigation -->
-  <nav class="mobile-nav" [class.open]="isMobileMenuOpen">
-    <ul class="mobile-nav-list">
-      <li><a href="/dashboard" (click)="navigateToRoute('/dashboard')">📊 Dashboard</a></li>
-      <li><a href="/trains" (click)="navigateToRoute('/trains')">🚆 Trains</a></li>
-      <li><a href="/schedules" (click)="navigateToRoute('/schedules')">📅 Schedules</a></li>
-      <li><a href="/bookings" (click)="navigateToRoute('/bookings')">🎫 Bookings</a></li>
-      <li><a href="/stations" (click)="navigateToRoute('/stations')">🏢 Stations</a></li>
-      <li><a href="/reports" (click)="navigateToRoute('/reports')">📈 Reports</a></li>
-    </ul>
-  </nav>
+    <div class="mobile-menu" [class.hidden]="!isMobileMenuOpen">
+      <button class="mobile-nav-item">Home</button>
+      <button class="mobile-nav-item" routerLink="/dashboard">Dashboard</button>
+      <button class="mobile-nav-item">Orders</button>
+      <button class="mobile-nav-item" (click)="passwordChnage()">Change Password</button>
+      <button class="mobile-nav-item" (click)="logout()">Logout</button>
+    </div>
+  </div>
 </header>

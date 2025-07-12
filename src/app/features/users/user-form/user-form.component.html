@@ -1,0 +1,86 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1 class="form-title">You can now {{mode}}</h1>
+    <p class="form-subtitle">Enter user information to add to the system</p>
+  </div>
+  
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName" class="form-label">First Name</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          class="form-input" 
+          formControlName="first_name"
+          [disabled]="isViewMode"
+          placeholder="Enter first name">
+
+        <div class="error-message" *ngIf="userForm.controls['first_name'].errors && (userForm.controls['first_name'].dirty || userForm.controls['first_name'].touched)">
+          <span *ngIf="userForm.controls['first_name'].errors['required']">First name is required.</span>
+          <span *ngIf="userForm.controls['first_name'].errors['minlength']">First name must be at least {{userForm.controls['first_name'].errors['minlength'].requiredLength}} characters long.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          class="form-input" 
+          formControlName="last_name"
+          [disabled]="isViewMode"
+          placeholder="Enter last name">
+
+        <div class="error-message" *ngIf="userForm.controls['last_name'].errors && (userForm.controls['last_name'].dirty || userForm.controls['last_name'].touched)">
+          <span *ngIf="userForm.controls['last_name'].errors['required']">Last name is required.</span>
+          <span *ngIf="userForm.controls['last_name'].errors['minlength']">Last name must be at least {{userForm.controls['last_name'].errors['minlength'].requiredLength}} characters long.</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="email" class="form-label">Gender</label>
+      <select 
+        type="gender"  
+        class="form-input" 
+        formControlName="gender"
+        [disabled]="isViewMode"
+        placeholder="Enter gender ">
+        <option value="FEMALE">Female</option>
+    <option value="MALE">Male</option>
+        </select>
+      <div class="error-message" *ngIf="userForm.controls['gender'].errors && (userForm.controls['gender'].dirty || userForm.controls['gender'].touched)">
+        <span *ngIf="userForm.controls['gender'].errors['required']">gender is required.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Date of birth" class="form-label">Date of Birth</label>
+        <input 
+          type="date" 
+          class="form-input" 
+          formControlName="dateofbirth"
+          placeholder="Enter Date Of Birth">
+
+        <div class="error-message" *ngIf="userForm.controls['dateofbirth'].touched && userForm.controls['dateofbirth'].errors?.['required']">
+          <span >Date of birth is required.</span>
+        </div>
+      </div>
+    
+    <button 
+      type="submit" 
+      class="submit-btn"
+      *ngIf="data.mode === 'edit'">
+      Edit User
+    </button>
+
+    <button 
+      type="submit" 
+      class="submit-btn"
+      *ngIf="data.mode === 'add'">
+      Add User
+    </button>
+    
+  </form>
+</div>

@@ -13,6 +13,9 @@ export class TokenService {
   getAccessToken(): string | null {
     return localStorage.getItem(this.ACCESS_TOKEN_KEY);
   }
+  saveAcessToken(access:string):void{
+    localStorage.setItem(this.ACCESS_TOKEN_KEY,access);
+  }
 
   getRefreshToken(): string | null {
     return localStorage.getItem(this.REFRESH_TOKEN_KEY);

@@ -1,0 +1,38 @@
+<div class="dashboard-container">
+  <h1>Dashboard Overview</h1>
+  
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of statistics" [style.--card-color]="stat.color">
+      <div class="card-icon">
+        <span class="material-icons">{{stat.icon}}</span>
+      </div>
+      
+      <div class="card-content">
+        <h3>{{stat.title}}</h3>
+        <div class="value-container">
+          <span class="value">{{stat.value}}</span>
+          
+          <div class="trend" *ngIf="stat.trend">
+            <span class="material-icons trend-icon" [class.up]="stat.trend.isUpward" [class.down]="!stat.trend.isUpward">
+              {{stat.trend.isUpward ? 'trending_up' : 'trending_down'}}
+            </span>
+            <span class="trend-value" [class.up]="stat.trend.isUpward" [class.down]="!stat.trend.isUpward">
+              {{stat.trend.value}}%
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-section">
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [dataLabels]="chartOptions.dataLabels"
+    [stroke]="chartOptions.stroke"
+    [title]="chartOptions.title"
+    [markers]="chartOptions.markers"
+  ></apx-chart>
+</div>
+</div>

@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit,OnDestroy {
     alert('Microsoft login clicked (dummy function)');
   }
   onSubmit(): void {
+    console.log("submit is claickerd");
     if (this.loginForm.invalid) {
       this.errorMessage = 'Please fill in all fields correctly';
       return;
@@ -61,9 +62,11 @@ export class LoginComponent implements OnInit,OnDestroy {
       next:(res:any)=>{
         this.token.saveTokens(res.access_token,res.refresh_token)
         this.router.navigate(['dashboard']);
+        this.isLoading=false;
       },
       error:(err)=>{
         console.log('login error:',err);
+        this.isLoading=false;
       }
     })
   }

@@ -1,0 +1,61 @@
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th class="header-number">#</th>
+        <th class="header-train-id">Train ID</th>
+        <th class="header-class">Class</th>
+        <th class="header-source">Source Station</th>
+        <th class="header-destination">Destination Station</th>
+        <th class="header-date">Journey Date</th>
+        <th class="header-amount">Amount</th>
+        <th class="header-pnr">PNR</th>
+        <th class="header-status">Status</th>
+        <th class="header-action">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets; let i = index" class="table-row">
+        <td>
+          <div>
+            {{ i + 1 }}
+          </div>
+        </td>
+        <td class="train-id-cell">{{ ticket.train_id }}</td>
+        <td class="class-cell">{{ ticket.train_class }}</td>
+        <td class="source-cell">{{ ticket.source_station }}</td>
+        <td class="destination-cell">{{ ticket.destination_station }}</td>
+        <td class="date-cell">{{ ticket.journey_date }}</td>
+        <td class="amount-cell">{{ ticket.amount }}</td>
+        <td class="pnr-cell">{{ ticket.pnr }}</td>
+        <td class="status-cell">{{ ticket.status }}</td>
+        <td>
+          <div class="action-btn-group">
+            
+            <button class="action-btn view" title="View" (click)="view(ticket)">
+              <!-- SVG for view -->
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+            <button class="action-btn delete" (click)="onDelete(ticket)" title="Delete">
+              <!-- SVG for delete -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3,6 5,6 21,6"></polyline>
+                <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

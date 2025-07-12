@@ -1,0 +1,110 @@
+<form [formGroup]="searchForm" class="search-container">
+  <div class="search-bar">
+
+    <div class="field-group">
+      <label class="field-label">From</label>
+      <div class="select-wrapper">
+        <ng-multiselect-dropdown
+        [settings]="dropdownSettings"
+          [data]="cities"
+          formControlName="from"
+          (onSelectAll)="onSelectAll($event)"
+          placeholder="From">
+        </ng-multiselect-dropdown>
+        <div *ngIf="f['from'].touched && f['from'].invalid" class="error-msg">
+          From is required
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">To</label>
+      <div class="select-wrapper">
+        <ng-multiselect-dropdown
+        [settings]="dropdownSettings"
+        (onSelectAll)="onSelectAll($event)"
+        formControlName="to"
+          [data]="cities"
+          placeholder="To">
+        </ng-multiselect-dropdown>
+        <div *ngIf="f['to'].touched && f['to'].invalid" class="error-msg">
+          To is required
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Date</label>
+      <div class="date-wrapper">
+        <input type="date"
+               [min]="todayDate"
+               formControlName="date"
+               class="custom-date-input"
+               placeholder="Select date" />
+        <div *ngIf="f['date'].touched && f['date'].invalid" class="error-msg">
+          Date is required
+        </div>
+      </div>
+    </div>
+
+    <div class="search-button-group">
+      <button type="button" (click)="searchTrain()" class="search-button">
+        <span>Search Train</span>
+      </button>
+    </div>
+
+  </div>
+
+  <div *ngIf="errormsg">Sorry no direct train found</div>
+
+  <div *ngIf="disparr.length > 0" class="row">
+    <div class="column" *ngFor="let train of disparr">
+      <div class="card">
+        <div>
+          <strong>{{ train.trainName }}</strong> ({{ train.trainNumber }})
+        </div>
+        <div>{{ train.fromStnName }} ({{ train.fromStnCode }}) - {{ train.toStnName }} ({{ train.toStnCode }})</div>
+        <div>Dep: {{ train.departureTime }} | Arr: {{ train.arrivalTime }} | Duration: {{ train.duration }} min</div>
+        <div>Classes: {{ train.avlClasses.join(', ') }}</div>
+        <div>Pantry: 
+          <span [ngClass]="{'yes': train.hasPantry, 'no': !train.hasPantry}">
+            {{ train.hasPantry ? 'Yes' : 'No' }}
+          </span>
+        </div>
+        <div>Rating: {{ train.trainRating }}</div>
+
+        <div *ngIf="train.availabilityCache">
+          <div><strong>General Quota Availability:</strong></div>
+          <div *ngFor="let cls of train.avlClasses">
+            <div *ngIf="train.availabilityCache[cls]">
+              {{ cls }}:
+              <span>
+                {{ train.availabilityCache[cls].availabilityDisplayName }}
+                ({{ train.availabilityCache[cls].predictionDisplayName }})
+                | Fare: ₹{{ train.availabilityCache[cls].fare }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="train.availabilityCacheTatkal">
+          <div><strong>Tatkal Quota Availability:</strong></div>
+          <div *ngFor="let cls of train.avlClasses">
+            <div *ngIf="train.availabilityCacheTatkal[cls]">
+              {{ cls }}:
+              <span>
+                {{ train.availabilityCacheTatkal[cls].availabilityDisplayName }}
+                ({{ train.availabilityCacheTatkal[cls].predictionDisplayName }})
+                | Fare: ₹{{ train.availabilityCacheTatkal[cls].fare }}
+              </span>
+            </div>
+          </div>
+          <div class="button-align">
+            <button type="button" class="btn btn-primary" (click)="bookTickit(train)">Book Ticket</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

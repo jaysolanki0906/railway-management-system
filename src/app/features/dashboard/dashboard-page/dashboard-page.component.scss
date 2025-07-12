@@ -1,0 +1,113 @@
+.dashboard-container {
+  padding: 24px;
+  
+  h1 {
+    color: #1a237e;
+    margin-bottom: 32px;
+    font-size: 28px;
+    font-weight: 500;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-icon {
+    background: var(--card-color);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .material-icons {
+      color: white;
+      font-size: 24px;
+    }
+  }
+
+  .card-content {
+    flex: 1;
+    
+    h3 {
+      color: #5c6bc0;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 0 8px 0;
+    }
+
+    .value-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      
+      .value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1a237e;
+      }
+    }
+
+    .trend {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 20px;
+      background: #f5f5f5;
+      
+      .trend-icon {
+        font-size: 16px;
+        
+        &.up { color: #4caf50; }
+        &.down { color: #f44336; }
+      }
+      
+      .trend-value {
+        font-size: 12px;
+        font-weight: 500;
+        
+        &.up { color: #4caf50; }
+        &.down { color: #f44336; }
+      }
+    }
+  }
+}
+.chart-section {
+  margin-top: 32px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card {
+    padding: 20px;
+  }
+}

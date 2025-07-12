@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { Router, RouterModule, Routes, RoutesRecognized } from '@angular/router';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 const routes: Routes = [
   { path: '', component: DashboardPageComponent }
@@ -11,6 +12,7 @@ const routes: Routes = [
   declarations: [DashboardPageComponent],
   imports: [
     CommonModule,
+    NgApexchartsModule,
     RouterModule.forChild(routes),
   ],
   exports:[RouterModule]

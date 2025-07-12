@@ -1,0 +1,140 @@
+<div class="form-container">
+  <div class="form-header">
+    <h1 class="form-title">Fill All The Necessary Details</h1>
+    <p class="form-subtitle">Enter user information to add to the system</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="train_quota" class="form-label">Select Quota</label>
+        <select class="form-input" formControlName="train_quota">
+          <option *ngFor="let option of quota" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+        <small class="error-message" *ngIf="form.get('train_quota')?.invalid && form.get('train_quota')?.touched">
+          This field is required to fill
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="train_class" class="form-label">Select Class</label>
+        <select
+          class="form-input"
+          (change)="setFair()"
+          formControlName="train_class">
+          <option *ngFor="let option of list" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+        <small class="error-message" *ngIf="form.get('train_class')?.invalid && form.get('train_class')?.touched">
+          This field is required to fill
+        </small>
+      </div>
+
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="source_station" class="form-label">Source Station</label>
+        <input
+          type="text"
+          id="source_station"
+          class="form-input"
+          placeholder="Enter source station"
+          formControlName="source_station"
+        />
+        <small
+          class="error-message"
+          *ngIf="form.get('source_station')?.invalid &&form.get('source_station')?.touched">
+          This field is required to fill
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="destination_station" class="form-label"
+          >Destination Station</label
+        >
+        <input
+          type="text"
+          id="destination_station"
+          class="form-input"
+          placeholder="Enter destination station"
+          formControlName="destination_station"
+        />
+        <small
+          class="error-message"
+          *ngIf="
+            form.get('destination_station')?.invalid &&
+            form.get('destination_station')?.touched
+          "
+        >
+          This field is required to fill
+        </small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="journey_date" class="form-label">Date of Journey</label>
+        <input
+          type="date"
+          id="journey_date"
+          class="form-input"
+          formControlName="journey_date"
+        />
+        <small
+          class="error-message"
+          *ngIf="
+            form.get('journey_date')?.invalid &&
+            form.get('journey_date')?.touched
+          "
+        >
+          This field is required to fill
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="fair" class="form-label">Fare</label>
+        <input
+          type="number"
+          id="fair"
+          class="form-input"
+          placeholder="Enter fare amount"
+          formControlName="fair"
+        />
+        <small
+          class="error-message"
+          *ngIf="form.get('fair')?.invalid && form.get('fair')?.touched"
+        >
+          This field is required to fill
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group full-width">
+      <label for="passenger_list" class="form-label">Choose Passengers</label>
+      <ng-multiselect-dropdown
+        [placeholder]="'Select passengers'"
+        [settings]="dropdownSettings"
+        [data]="dropdownList"
+        formControlName="passenger_list"
+        class="multiselect-dropdown"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+      >
+      </ng-multiselect-dropdown>
+      <small
+        class="error-message"
+        *ngIf="(form.get('passenger_list')?.invalid ||form.value.passenger_list?.length == 0) &&form.get('passenger_list')?.touched"
+>
+        This field is required to fill
+      </small>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="submit-btn" [disabled]="form.invalid">
+        <span class="btn-text">Submit</span>
+      </button>
+    </div>
+  </form>
+</div>

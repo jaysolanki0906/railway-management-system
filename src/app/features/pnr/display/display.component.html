@@ -1,0 +1,37 @@
+<div class="search-container">
+  <label class="search-label">Search By PNR Number</label>
+  <div class="search-controls">
+    <input type="number" [(ngModel)]="myInputValue" placeholder="Enter PNR" class="search-input" />
+    <button class="search-btn" (click)="fetchPnr()">Search</button>
+  </div>
+</div>
+
+<div class="ticket-card" *ngIf="display">
+  <div class="ticket-header">
+    <h2>Ticket Details</h2>
+    <p>PNR: {{objectPnr.pnr}}</p>
+  </div>
+  <div class="ticket-grid">
+    <div><strong>Train No:</strong> {{objectPnr.train_id}}</div>
+    <div><strong>Class:</strong> {{objectPnr.train_class}}</div>
+    <div><strong>Status:</strong> {{objectPnr.status}}</div>
+    <div><strong>Date of Journey:</strong> {{objectPnr.journey_date}}</div>
+    <div><strong>From:</strong> {{objectPnr.source_station}}</div>
+    <div><strong>To:</strong> {{objectPnr.destination_station}}</div>
+    <div><strong>Amount:</strong> {{objectPnr.amount}}</div>
+  </div>
+
+  <div class="passenger-section">
+    <h3>Passenger Details</h3>
+    <div class="passenger-grid" *ngFor="let passenger of objectPnr.booking_details">
+      <div><strong>Name:</strong> {{passenger.profile.first_name}} {{passenger.profile.last_name}}</div>
+      <div><strong>Gender:</strong> {{passenger.profile.gender}}</div>
+      <div><strong>DOB:</strong> {{passenger.profile.dateofbirth}}</div>
+      <div><strong>Seat No:</strong> {{passenger.seat_no}}</div>
+      <div><strong>Status:</strong> {{passenger.status}}</div>
+    </div>
+  </div>
+</div>
+<div *ngIf="noData" class="no-data-message">
+  Sorry, data is not present.
+</div>
