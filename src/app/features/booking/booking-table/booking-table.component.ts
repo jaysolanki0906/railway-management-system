@@ -35,6 +35,8 @@ export class BookingTableComponent implements OnInit {
     this.dialog.open(ShowBookingComponent,{
       width:'600px',
       data:{tickit,mode:'delete'}
+    }).afterClosed().subscribe({
+      next:()=>{this.fetchData()}
     })
   }
   view(tickit:any){

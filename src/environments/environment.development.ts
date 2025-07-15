@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'https://train-ticket-booking-fqj2.onrender.com' 
 };

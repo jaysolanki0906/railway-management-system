@@ -12,8 +12,7 @@ export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent,canActivate:[RedirectGuard]},
     { path: 'register', component: RegisterComponent },
-    {
-        path: 'dashboard',
+    { path: 'dashboard',
         loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
         canActivate:[AuthGuard]
     },
@@ -21,5 +20,6 @@ export const routes: Routes = [
     { path: 'users', loadChildren:()=>import('./features/users/users.module').then(m=>m.UsersModule),canActivate:[AuthGuard]},
     {path:'pnr',component:DisplayComponent},
     {path:'searchtrain',component:SearchTrainByStationComponent},
-    {path:'booking',loadChildren:()=>import('./features/booking/booking.module').then(m=>m.BookingModule),canActivate:[AuthGuard]}
+    {path:'booking',loadChildren:()=>import('./features/booking/booking.module').then(m=>m.BookingModule),canActivate:[AuthGuard]},
+    {path:'profile',loadChildren:()=>import('./features/profile/profile.module').then(m=>m.ProfileModule),canActivate:[AuthGuard]}
 ];

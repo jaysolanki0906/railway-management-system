@@ -4027,7 +4027,7 @@ export class StationNameService {
 {"name":"Sulebhavi", "code":"SBH"},
 {"name":"Shribhavnath", "code":"SBHN"},
 {"name":"Subrahmanyaroa", "code":"SBHR"},
-{"name":"Sabarmati Jn.", "code":"SBI"},
+{"name":"Sabarmati Jn.", "code":"SBIB"},
 {"name":"Sabalgarh", "code":"SBL"},
 {"name":"Shribalaji", "code":"SBLJ"},
 {"name":"Shribdryalathi", "code":"SBLT"},

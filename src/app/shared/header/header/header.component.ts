@@ -34,6 +34,10 @@ export class HeaderComponent {
   {
     this.router.navigate(['./pnr']);
   }
+  myProfile()
+  {
+    this.router.navigate(['profile']);
+  }
   bookingNavigate()
   {
     this.router.navigate(['./searchtrain']);

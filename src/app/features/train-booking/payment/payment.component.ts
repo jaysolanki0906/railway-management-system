@@ -5,17 +5,19 @@ import { StripeElements, StripeCardElement, StripeElementsOptions } from '@strip
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PaymentService } from '../../../core/services/payment.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   standalone: true,
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.scss',
-  imports: [CommonModule]
+  imports: [CommonModule,ReactiveFormsModule]
 })
 export class PaymentComponent implements OnInit {
   elements!: StripeElements;
   card!: StripeCardElement;
+  paymentForm!: FormGroup;
   isProcessing = false;
   errorMessage = '';
   paymentResult: any = null;
@@ -28,12 +30,16 @@ export class PaymentComponent implements OnInit {
   clientSecret!: string;
 
   constructor(
+    private fb: FormBuilder,
     private payment:PaymentService,
     private stripeService: StripeService,
     private route:Router,
     public dialogRef: MatDialogRef<PaymentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+    this.paymentForm = this.fb.group({
+      cardInfo: ['', Validators.required]
+    });
     console.log('DATA:', data);
     this.clientSecret = data?.ticket?.payment_data?.client_secret ?? '';
     console.log('Client Secret:', this.clientSecret);

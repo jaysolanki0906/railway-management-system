@@ -18,7 +18,6 @@ export class TrainDetailsService {
     .set('from', from)
     .set('to', to)
     .set('date', date);
-
   return this.api.get('trains/find_train', { params });
 }
 }

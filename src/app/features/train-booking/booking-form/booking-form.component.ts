@@ -148,7 +148,12 @@ export class BookingFormComponent implements OnInit {
 
   setFair() {
     const t_class = this.form.value.train_class;
-    const cache = this.data.train.availabilityCache;
+    let cache;
+    if(this.form.value.train_class=='General'){
+    cache = this.data.train.availabilityCache;}
+    else{
+      cache=this.data.train.availabilityCacheTatkal;
+    }
     const selectedClass = cache[t_class];
     console.log('Selected class:', selectedClass);
     if (selectedClass) {

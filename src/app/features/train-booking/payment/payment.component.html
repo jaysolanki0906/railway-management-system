@@ -14,17 +14,18 @@
     </div>
 
     <div class="payment-form">
-      <div class="form-group">
-        <label class="form-label">Card Information</label>
-        <div class="card-input-container">
-          <div id="card-element" class="card-element"></div>
-          <div class="card-icons">
-            <svg class="card-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2 4h20v16H2V4zm2 2v12h16V6H4zm2 2h12v2H6V8zm0 4h8v2H6v-2z"/>
-            </svg>
-          </div>
-        </div>
+  <div class="form-group">
+    <label class="form-label">Card Information<span style="color: red">*</span></label>
+    <div class="card-input-container">
+      <div id="card-element" class="card-element"></div>
+      <div class="card-icons">
+        <!-- your SVG -->
       </div>
+    </div>
+    <div class="error" *ngIf="paymentForm.get('cardInfo')?.touched && paymentForm.get('cardInfo')?.valid">
+      Card information is required.
+    </div>
+  </div>
 
       <button 
         class="payment-button"

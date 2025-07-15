@@ -9,6 +9,7 @@
       <div class="form-group">
         <label for="train_quota" class="form-label">Select Quota</label>
         <select class="form-input" formControlName="train_quota">
+          <option value="" disabled selected>Select Quota from below</option>
           <option *ngFor="let option of quota" [value]="option">
             {{ option }}
           </option>
@@ -23,6 +24,7 @@
           class="form-input"
           (change)="setFair()"
           formControlName="train_class">
+          <option value="" disabled selected>Select Class from below</option>
           <option *ngFor="let option of list" [value]="option">
             {{ option }}
           </option>
@@ -133,7 +135,7 @@
 
     <div class="form-actions">
       <button type="submit" class="submit-btn" [disabled]="form.invalid">
-        <span class="btn-text">Submit</span>
+        <span class="btn-text">Book Now</span>
       </button>
     </div>
   </form>

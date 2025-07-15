@@ -66,7 +66,7 @@ export class ShowBookingComponent implements OnInit {
     this.booking.fetchOneBooking(this.data.tickit.id).subscribe({
       next: (res: any) => {
         const passengers = res[0].booking_details.map((detail: any) => ({
-          id: detail.profile_id,
+          id: detail.id,
           name: detail.profile.first_name,
         }));
 
@@ -85,7 +85,8 @@ export class ShowBookingComponent implements OnInit {
         });
 
         this.dropdownList = passengers;
-        console.log('Dropdown list populated:', this.dropdownList);
+        console.log('Dropdown list', this.dropdownList);
+        console.log('res',res);
       },
       error: (err) => {
         console.error(err);
@@ -104,6 +105,7 @@ export class ShowBookingComponent implements OnInit {
     this.booking.deleteBooking(this.data.tickit.id, paylod).subscribe({
       next: () => {
         alert('congo! functionality works');
+        this.dialogRef.close();
       },
     });
   }
